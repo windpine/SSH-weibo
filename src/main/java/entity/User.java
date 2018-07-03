@@ -24,6 +24,7 @@ public class User {
     private String sex;
     private Timestamp creatTime;
     private String role;
+    private String email;
 
     @Id
     @Column(name = "UID", nullable = false)
@@ -125,6 +126,16 @@ public class User {
         this.role = role;
     }
 
+    @Basic
+    @Column(name = "email", nullable = false, length = 32)
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -139,12 +150,13 @@ public class User {
                 Objects.equals(followers, user.followers) &&
                 Objects.equals(sex, user.sex) &&
                 Objects.equals(creatTime, user.creatTime) &&
-                Objects.equals(role, user.role);
+                Objects.equals(role, user.role) &&
+                Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(uid, username, nickname, password, tweets, follows, followers, sex, creatTime, role);
+        return Objects.hash(uid, username, nickname, password, tweets, follows, followers, sex, creatTime, role, email);
     }
 }

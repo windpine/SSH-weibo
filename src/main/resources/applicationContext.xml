@@ -46,12 +46,13 @@
     <!-- 配置 hibernate 映射文件的位置及名称, 可以使用通配符 -->
     <property name="annotatedClasses">
         <list>
-            <value>entity.User</value>
             <value>entity.Comment</value>
             <value>entity.Mention</value>
             <value>entity.Relation</value>
             <value>entity.Topic</value>
             <value>entity.Tweet</value>
+            <value>entity.Message</value>
+            <value>entity.User</value>
         </list>
     </property>
 </bean>
