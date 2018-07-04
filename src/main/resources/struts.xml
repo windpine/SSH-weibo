@@ -12,10 +12,5 @@
 
     </package>
 
-    <package name="ajax" namespace="/json" extends="json-default">
-
-
-    </package>
-
 
 </struts>
