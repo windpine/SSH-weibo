@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <!-- 配置自动扫描的包 -->
+    <context:component-scan base-package="dao"/>
+    <context:component-scan base-package="service"/>
+    <context:component-scan base-package="action"/>
+    <context:component-scan base-package="utils"/>
+    <context:component-scan base-package="dto"/>
+
+    <!-- 配置数据源 -->
+    <!-- 导入资源文件 -->
+    <context:property-placeholder location="classpath:db.properties" />
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+        <property name="jdbcUrl" value="${jdbc.jdbcUrl}"/>
+
+        <property name="initialPoolSize" value="${jdbc.initPoolSize}"/>
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+    </bean>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- 配置jpa的具体实现 -->
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
+        </property>
+        <!-- 配置扫描包,扫描所有带有jpa注解的类(就是entity注解) -->
+        <property name="packagesToScan" value="entity"></property>
+
+
+        <!-- 配置具体实现的相关配置(因为指定了具体实现是hibernate,因此也需要为hibernate进行相关的配置) -->
+        <!-- JPA和JDBC一样是规范,你需要给它指定一个具体的实现 -->
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+
+        </property>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"></property>
+    </bean>
+
+    <!-- 注解驱动:扫描带有@Transaction注解的类或方法 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 配置扫描springdata 扫描的是继承自Repository接口的接口 (接口可以多继承) 目的:扫描jpa注解 -->
+    <jpa:repositories base-package="entity" entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>
+</beans>
