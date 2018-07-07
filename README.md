@@ -16,9 +16,9 @@
 
 *自己去了解一下有哪些注解，都比较简单*
 
-~~#### Struts2 
-该次版本取消了struts.xml的繁琐配置，直接使用注解形式，等效于配置文件，具体参考资料链接以及HelloAction
-~~
+<del> Struts2 
+该次版本取消了struts.xml的繁琐配置，直接使用注解形式，等效于配置文件，具体参考资料链接以及HelloAction </del>
+
 #### Springboot
 替换struts2，更好的实现rest接口设计
 
