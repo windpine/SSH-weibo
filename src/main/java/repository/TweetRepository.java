@@ -1,7 +1,7 @@
 package repository;
 
-import entity.Tweet;
-import org.springframework.data.jpa.repository.JpaRepository;
+        import entity.Tweet;
+        import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @anthor tanshangou
