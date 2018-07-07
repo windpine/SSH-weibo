@@ -16,8 +16,11 @@
 
 *自己去了解一下有哪些注解，都比较简单*
 
-#### Struts2 
+~~#### Struts2 
 该次版本取消了struts.xml的繁琐配置，直接使用注解形式，等效于配置文件，具体参考资料链接以及HelloAction
+~~
+#### Springboot
+替换struts2，更好的实现rest接口设计
 
 #### Spring data jpa
 该次版本引入了Hibernate 5作为基础，使用Spring实现的jpa持久层框架，简单快捷，减少使用难度。
