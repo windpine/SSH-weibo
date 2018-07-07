@@ -8,7 +8,6 @@
 	<!--<constant name="struts.action.extension" value="do,action" />-->
 	
 	<!-- 所有匹配的请求都由struts2处理 -->
-	<!-- 除了/ 和 /index.jsp -->
-	<!--<constant name="struts.action.extension" value="" />
-	<constant name="struts.action.excludePattern" value="/,/index.jsp"/>-->
+	<!-- 除了/ 和 /index.jsp --><constant name="struts.i18n.reload" value="false" />
+	<constant name="struts.devMode" value="false" />
 </struts>

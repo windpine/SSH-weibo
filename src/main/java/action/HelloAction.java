@@ -14,7 +14,7 @@ import org.apache.struts2.convention.annotation.*;
 public class HelloAction extends ActionSupport {
 
     @Action(value = "hello",results = {
-            @Result(name = "success", location = "/jsp/hello/hello.jsp")})
+            @Result(name = "success", location = "/welcome.jsp")})
     public String hello(){
         return SUCCESS;
     }
